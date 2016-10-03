@@ -1,0 +1,106 @@
+{layout="site/.layout"}
+
+{!-- load the blog entries and stash them for output at the bottom of the page 
+	 yes, I still need Stash, sorry DJ :( --}
+{exp:channel:entries channel="blog" limit="6" dynamic="no" disable="member_data|categories" paginate="bottom" paginate_base="blog"}
+	{exp:stash:append name="blog_entries"}
+		{if count % 3 == 1}<div class="row">{/if}
+		<div class="small-12 medium-4 columns blog-post {if count==total_results}end{/if}">
+			<div class="blog-post-inner">
+				<div class="blog-post-image ">
+					<a href="{url_title_path='blog/entry'}">
+						<img src="{hero_image:thumbnail}">
+					</a>
+				</div>
+
+				<div class="blog-post-content match-height">
+					<h4>{if display_title}{display_title}{if:else}{title}{/if}</h4>
+
+					<p>{exp:chopper words="10" append="&hellip;"}{body}{/exp:chopper}</p>
+
+					<a class="blog-post-read-more" href="{url_title_path='blog/entry'}">Read More &raquo;</a>
+
+				</div>
+			</div>
+
+		</div>
+
+		{if count % 3 == 0 OR count == total_results}</div>{/if}
+
+		{!-- add a view more blogs link, if there are more blogs --}
+		{paginate}
+    			{if next_page}
+    			<div class="row">
+  					<div class="large-12 columns blog-next-page end no-padding-left">
+			        	<a href="{auto_path}">View More Entries&raquo;</a>
+			    	</div>  
+			    </div>	
+			    {/if}
+		{/paginate}
+
+	{/exp:stash:append}	
+{/exp:channel:entries}
+
+{!-- load page entry --}
+{exp:channel:entries channel="homepage" dynamic="no" url_title="homepage" limit="1" disable="member_data|categories|pagination"}
+
+	{!-- set layout variables --}
+	{layout:set name="head_title"}{if seo_title}{seo_title}{if:elseif display_title}{display_title}{if:else}{title}{/if}{/layout:set}
+	{layout:set name="head_description"}{seo_description}{/layout:set}
+	{layout:set name="head_robots"}{seo_robots}{/layout:set}
+	{layout:set name="body_class"}page-{url_title}{/layout:set}
+
+
+	{layout:set name="body_content"}
+		{!-- hero --}
+		<div class="hero" style="background-image: url('{hero_image}');">
+			<div class="row">
+
+				<div class="small-10 medium-7 columns medium-offset-5 small-offset-2 text">
+					<h1>{heading}</h1>
+				</div>
+			</div>
+		</div>
+
+		{!-- body --}
+		<div class="row body">
+			
+			{!-- left column content--}
+			<div class="small-12 medium-9 columns text">
+				{body}
+
+			</div>
+
+			{!-- sidebar content --}
+			<div class="small-12 medium-3 columns sidebar">
+				<div class="cta">
+					<h5>Stay in touch with the campaign.</h5>
+
+					<form>
+						<input type="text" placeholder="Name">
+
+						<input type="text" placeholder="Email">
+
+						<button class="button" type="submit">Stay in Touch</button> 
+					</form>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		{!-- blog entries --}
+		<div class="row blog">
+			<div class="small-12 columns no-padding-left">
+				<h4>From the Campaign Blog</h4>
+			</div>
+
+			{!-- output the blog entries --}
+			{exp:stash:get name="blog_entries"}
+
+			
+		</div>
+	{/layout:set}
+
+{/exp:channel:entries}

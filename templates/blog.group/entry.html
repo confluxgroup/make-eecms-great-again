@@ -1,0 +1,42 @@
+{layout="site/.layout"}
+
+{!-- load page entry --}
+{exp:channel:entries channel="blog" limit="1" disable="member_data|categories|pagination"}
+
+	{!-- set layout variables --}
+	{layout:set name="head_title"}{if seo_title}{seo_title}{if:elseif display_title}{display_title}{if:else}{title}{/if}{/layout:set}
+	{layout:set name="head_description"}{if seo_description}{seo_description}{if:else}{exp:chopper chars="150" append="..."}{body}{/exp:chopper}{/if}{/layout:set}
+	{layout:set name="head_robots"}{seo_robots backspace="1"}{item},{/seo_robots}{/layout:set}
+	{layout:set name="body_class"}page-{url_title}{/layout:set}
+
+
+	{layout:set name="body_content"}
+		{!-- hero --}
+		<div class="hero" style="{if hero_image}background-image: url('{hero_image}');{/if}">
+			<div class="row">
+
+				<div class="small-10 medium-7 columns medium-offset-5 small-offset-2 text">
+					<h1>{if display_title}{display_title}{if:else}{title}{/if}</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row body">
+			
+			{!-- left column content--}
+			<div class="small-12 medium-9 columns text">
+				{body}
+
+			</div>
+
+			{!-- sidebar --}
+			{blog-sidebar}
+
+		</div>	
+
+		
+
+		
+	{/layout:set}
+
+{/exp:channel:entries}

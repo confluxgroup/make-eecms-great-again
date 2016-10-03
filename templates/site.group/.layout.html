@@ -1,0 +1,112 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		{!-- meta --}
+		<title>{if layout:head_title}{layout:head_title}{if:else}Make EECMS Great Again{/if}</title>
+		<meta name="description" content="{layout:head_description}">
+
+		{!-- robots --}
+		<meta name="robots" content="{if layout:head_robots}{layout:head_robots}{if:else}index,follow{/if}">
+
+		{!-- open graph --}
+		<meta property="og:title" content="{layout:head_title}"/>
+		<meta property="og:description" content="{layout:head_description}"/>
+		<meta property="og:url" content="{current_url}"/>
+		<meta property="og:site_name" content="Make EECMS Great Again"/>
+		<meta property="og:type" content='website'/>
+		
+		{!-- twitter --}
+		<meta name="twitter:title" content="{layout:head_title}"/>
+		<meta name="twitter:description" content="{layout:head_description}"/>
+		<meta name="twitter:url" content="{current_url}"/>
+		<meta name="twitter:card" content="summary_large_image">
+		<meta name="twitter:site" content="@makeeegreatagn">
+
+		{!-- add social images --}
+		{exp:stash:get_list name="head_images"}
+			<meta property="og:image" content="{image_url}"/>
+			<meta property="og:image:width" content="{image_width}" />
+			<meta property="og:image:height" content="{image_height}" />
+			<meta name="twitter:image" content="{image_url}"/>
+		{/exp:stash:get_list}	
+		
+		{!-- styles --}
+		<link href="https://fonts.googleapis.com/css?family=Montserrat|Source+Sans+Pro:300,400,600" rel="stylesheet">
+		<link rel="stylesheet" href="{site_url}css/foundation.min.css">
+		<link rel="stylesheet" href="{site_url}css/app.css">
+
+		{!-- favicons, app icons, etc --}
+		<link rel="apple-touch-icon" sizes="57x57" href="{site_url}apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="{site_url}apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="{site_url}apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="{site_url}apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="{site_url}apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="{site_url}apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="{site_url}apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="{site_url}apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="{site_url}apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="{site_url}android-icon-192x192.png">
+		<link rel="icon" type="image{site_url}png" sizes="32x32" href="{site_url}favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="{site_url}favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="{site_url}favicon-16x16.png">
+		<link rel="manifest" href="{site_url}manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="{site_url}ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+
+
+	</head>
+	<body class="{layout:body_class}">
+		{layout:body_start}
+
+		{!-- header --}
+		<header class="main">
+			<div class="row">
+				<div class="small-12 medium-2 columns logo">
+					<a href="{site_url}"><img src="{site_url}img/logo.png"></a>
+				</div>
+
+				<div class="small-12 medium-7 columns nav-wrapper end">
+					
+					<nav class="nav-main">
+						<ul class="row">
+							<li class="columns"><a href="{path='about-the-campaign'}">About</a></li>
+							<li class="columns"><a href="{path='the-issues'}">Issues</a></li>
+							<li class="columns"><a href="{path='blog'}">Blog</a></li>
+							<li class="columns take-action small-12 medium-expand"><a href="{path='take-action'}">Take Action</a></li>
+						</ul>
+						
+
+					</nav>
+					
+				</div>
+
+			</div>
+		</header>
+
+		{!-- page body from template --}
+		{layout:body_content}
+
+		{layout:contents}
+
+		{!-- footer --}
+		<footer>
+			<div class="row">
+				<div class="large-12 large-centered columns">
+					<p>&copy;2016 Paid for by ExpressionEngine&reg; for America. Designed and built by <a href="https://confluxgroup.com" target="_blank">Conflux Group</a></p>
+				</div>
+			</div>
+		</footer>
+
+
+		{layout:body_end}
+		{!-- scripts --}
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="{site_url}js/vendor/jquery.matchHeight-min.js"></script>
+		<script src="{site_url}js/app.js"></script>
+	</body>
+</html>

@@ -1,0 +1,41 @@
+{layout="site/.layout"}
+
+{!-- load page entry --}
+{exp:channel:entries channel="pages" dynamic="no" url_title="page-not-found" limit="1" disable="member_data|categories|pagination"}
+
+	{!-- set layout variables --}
+	{layout:set name="head_title"}{if seo_title}{seo_title}{if:elseif display_title}{display_title}{if:else}{title}{/if}{/layout:set}
+	{layout:set name="head_description"}{seo_description}{/layout:set}
+	{layout:set name="head_robots"}noindex,nofollow{/layout:set}
+	{layout:set name="body_class"}page-{url_title}{/layout:set}
+
+
+	{layout:set name="body_content"}
+		{!-- hero --}
+		<div class="hero" style="background-image: url('{hero_image}');">
+			<div class="row">
+
+				<div class="large-7 columns large-offset-5 text">
+					<h1>{if display_title}{display_title}{if:else}{title}{/if}</h1>
+				</div>
+			</div>
+		</div>
+
+		<div class="row body">
+			
+			{!-- left column content--}
+			<div class="large-9 columns text">
+				{body}
+
+			</div>
+
+			<div class="large-3 columns sidebar">
+
+			</div>
+
+		</div>	
+
+		
+	{/layout:set}
+
+{/exp:channel:entries}

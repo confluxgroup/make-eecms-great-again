@@ -1,0 +1,107 @@
+{layout="site/.layout"}
+
+{if segment_3}{redirect="404"}{/if}
+
+{!-- load the blog entries and stash them for output at the bottom of the page 
+	 yes, I still need Stash, sorry DJ :( --}
+{exp:channel:entries channel="blog" limit="6" dynamic="no" disable="member_data|categories" paginate="bottom" paginate_base="blog"}
+	{exp:stash:append name="blog_entries"}
+		{if count % 2 == 1}<div class="row">{/if}
+			<div class="small-12 medium-6 columns blog-post {if count==total_results}end{/if}">
+				<div class="blog-post-inner">
+					<div class="blog-post-image ">
+						<a href="{url_title_path='blog/entry'}">
+							<img src="{hero_image:thumbnail}">
+						</a>
+					</div>
+
+					<div class="blog-post-content match-height">
+						<h4>{if display_title}{display_title}{if:else}{title}{/if}</h4>
+
+						<p>{exp:chopper words="10" append="&hellip;"}{body}{/exp:chopper}</p>
+
+						<a class="blog-post-read-more" href="{url_title_path='blog/entry'}">Read More &raquo;</a>
+
+					</div>
+				</div>
+
+			</div>
+
+		{if count % 2 == 0 OR count == total_results}</div>{/if}
+
+		{!-- add a view more blogs link, if there are more blogs --}
+		{paginate}
+    			
+    			<div class="row">
+  					{if previous_page}
+  					<div class="large-6 columns blog-next-page end">
+			        	<a href="{auto_path}">&laquo; View Newer Entries</a>
+			    	</div> 
+			    	{/if} 
+
+			    	{if next_page}
+  					<div class="large-6 columns blog-next-page end">
+			        	<a href="{auto_path}">View Older Entries &raquo;</a>
+			    	</div> 
+			    	{/if} 
+			    </div>	
+
+		{/paginate}
+
+	{/exp:stash:append}
+
+	{exp:stash:append_list name="head_images"}
+		{hero_image}
+			{stash:image_url}{url}{/stash:image_url}
+			{stash:image_width}{width}{/stash:image_width}
+			{stash:image_height}{height}{/stash:image_height}
+		{/hero_image}	
+	{/exp:stash:append_list}
+{/exp:channel:entries}
+
+{!-- load page entry --}
+{exp:channel:entries channel="pages" dynamic="no" url_title="blog" limit="1" disable="member_data|categories|pagination"}
+
+	{!-- set layout variables --}
+	{layout:set name="head_title"}{if seo_title}{seo_title}{if:elseif display_title}{display_title}{if:else}{title}{/if}{/layout:set}
+	{layout:set name="head_description"}{seo_description}{/layout:set}
+	
+	{if segment_2}
+		{layout:set name="head_robots"}noindex,nofollow{/layout:set}
+	{if:else}
+		{layout:set name="head_robots"}index,follow{/layout:set}
+	{/if}	
+	{layout:set name="body_class"}page-blog{/layout:set}
+
+
+	{layout:set name="body_content"}
+		{!-- hero --}
+		<div class="hero" style="{if hero_image}background-image: url('{hero_image}');{/if}">
+			<div class="row">
+
+				<div class="large-7 columns large-offset-5 text">
+					<h1>{if display_title}{display_title}{if:else}{title}{/if}</h1>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="row body">
+
+			{!-- left column content--}
+			<div class="small-12 medium-9 columns text">
+				{!-- blog entries --}
+				<div class="blog">
+					{!-- output the blog entries --}
+					{exp:stash:get name="blog_entries"}
+				</div>
+
+			</div>
+
+			{!-- sidebar --}
+			{blog-sidebar}
+
+		</div>
+	{/layout:set}
+
+{/exp:channel:entries}

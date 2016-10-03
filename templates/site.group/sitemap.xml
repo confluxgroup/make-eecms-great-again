@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>{site_url}</loc>
+  <lastmod>{current_time format="%Y-%m-%dT%H:%i:%s%Q"}</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+{!--
+  List out all of the entries using the Pages module
+--}
+{exp:channel:entries dynamic="no" channel="pages" limit="10000" disable="member_data|pagination|categories|custom_fields"}
+<url>
+  <loc>{page_url}</loc>
+  <lastmod>{edit_date format="%Y-%m-%dT%H:%i:%s%Q"}</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+{/exp:channel:entries}
+
+{!-- 
+  List out the blog entries
+--}
+{exp:channel:entries dynamic="no" channel="blog" limit="100000" disable="member_data|pagination|categories|custom_fields"}
+<url>
+  <loc>{url_title_path="blog/entry"}</loc>
+  <lastmod>{entry_date format="%Y-%m-%dT%H:%i:%s%Q"}</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+{/exp:channel:entries}
+</urlset>

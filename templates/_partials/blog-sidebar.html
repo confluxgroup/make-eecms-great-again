@@ -1,0 +1,26 @@
+<div class="small-12 medium-3 columns sidebar">
+	
+	<nav class="blog-nav">
+		<h5>Categories</h5>
+		<ul class="no-bullet">
+			{exp:channel:categories channel="blog" show_empty="yes" style="linear"}
+			<li><a href="{path='blog'}">{category_name}</a></li>
+			{/exp:channel:categories}
+
+		</ul>
+	</nav>
+
+	<div class="cta">
+		<h5>Stay in touch with the campaign.</h5>
+
+		<form>
+			<input type="text" placeholder="Name">
+
+			<input type="text" placeholder="Email">
+
+			<button class="button" type="submit">Stay in Touch</button> 
+		</form>
+
+	</div>
+	
+</div>
